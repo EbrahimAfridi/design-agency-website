@@ -1,4 +1,6 @@
+'use client';
 import React from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 const TESTIMONIALS = [
   {
@@ -25,6 +27,22 @@ const TESTIMONIALS = [
 ];
 
 const Testimonial = () => {
+  const viewRef = React.useRef(null);
+  const isInView = useInView(viewRef, { once: true});
+  const controls = useAnimation(); 
+  React.useEffect(() => {
+    if (isInView) {
+      controls.start({
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 1,
+          ease: "easeInOut",
+        },
+      });
+    }
+  }, [isInView, controls]);
+
   return (
     <section className="w-full px-16 overflow-hidden py-6 md:py-8 lg:py-12">
       <header className="mb-8">
@@ -37,7 +55,13 @@ const Testimonial = () => {
       <div>
         <div className="flex flex-col md:flex-row gap-4">
           {TESTIMONIALS.map((testimonial) => (
-            <article
+            <motion.article
+              ref={viewRef}
+              initial={{
+                opacity: 0,
+                y: 100,
+              }}
+              animate={controls}
               key={testimonial.id}
               className="text-black border border-gray-200 p-4 max-w-md h-fit items-stretch rounded-xl hover:shadow-md"
             >
@@ -51,7 +75,7 @@ const Testimonial = () => {
                 <em>@</em>
                 {testimonial.companyName}
               </h4>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

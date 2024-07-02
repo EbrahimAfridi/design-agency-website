@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-import Image from "next/image";
 import {
   BarChart2,
   Lightbulb,
@@ -8,6 +8,7 @@ import {
   SquareCode,
   SwatchBook,
 } from "lucide-react";
+import { useAnimation, useInView, motion, easeInOut, easeIn } from "framer-motion";
 
 const SERVICES = [
   {
@@ -22,7 +23,7 @@ const SERVICES = [
     name: "UI/UX Designing",
     description:
       "Creating or improving products to meet user needs and market demands, using a combination of engineering, design, and marketing.",
-    image: <SwatchBook size={30} color="black"/>,
+    image: <SwatchBook size={30} color="black" />,
   },
   {
     id: 3,
@@ -55,9 +56,30 @@ const SERVICES = [
 ];
 
 const Services = () => {
+  const viewRef = React.useRef(null);
+  const isInView = useInView(viewRef, { once: true });
+  const controls = useAnimation();
+  const VARIANTS = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+  React.useEffect(() => {
+    // Trigger animation when the element is in view
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
+
   return (
     <section className="mb-10 flex max-w-screen-2xl flex-col items-start justify-center text-white bg-black px-6 py-10 md:mx-10 md:mb-20 md:rounded-xl md:px-12 md:py-20 xl:mb-32">
-      <header className="mb-12">
+      <motion.header
+        variants={VARIANTS}
+        initial="hidden"
+        animate={controls}
+        transition={{ ease: easeIn, duration: 0.5 }}
+        className="mb-12"
+        ref={viewRef}
+      >
         <h3
           className="mb-2 text-xl font-bold capitalize tracking-wider text-[#9a8dfe]"
           style={{ opacity: "1", transform: "none" }}
@@ -70,20 +92,29 @@ const Services = () => {
         <p className="mb-4 text-left text-lg font-medium capitalize text-zinc-300 sm:mb-6 sm:text-xl xl:text-2xl">
           Small Teams Making Great Impact.
         </p>
-      </header>
+      </motion.header>
       <main className="w-full grid-container">
         {SERVICES.map((service) => (
-          <article className="col-span-4 mb-4" key={service.name}>
+          <motion.article
+            variants={VARIANTS}
+            initial="hidden"
+            transition={{ ease: easeInOut, duration: 1 }}
+            animate={controls}
+            className="col-span-4 mb-4"
+            key={service.name}
+          >
             <header className="flex flex-col gap-4">
               <figure className="mb-4 w-fit rounded-full bg-gray-200 p-4">
                 {service.image}
               </figure>
-              <h3 className="mb-1 font-bold text-2xl text-white">{service.name}</h3>
+              <h3 className="mb-1 font-bold text-2xl text-white">
+                {service.name}
+              </h3>
             </header>
             <p className="text-base font-medium text-zinc-300 md:text-lg">
               {service.description}
             </p>
-          </article>
+          </motion.article>
         ))}
       </main>
     </section>

@@ -1,10 +1,28 @@
+"use client";
 import { Button } from "@nextui-org/react";
+import { useAnimation, useInView, motion } from "framer-motion";
 import React from "react";
 
 const ContactForm = () => {
+  const viewRef = React.useRef(null);
+  const isInView = useInView(viewRef, { once: true });
+  const controls = useAnimation();
+  React.useEffect(() => {
+    if (isInView) {
+      controls.start({
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 1,
+          ease: "easeInOut",
+        },
+      });
+    }
+  }, [isInView, controls]);
+
   return (
     <section className="px-8 md:px-16 flex flex-col lg:flex-row justify-between my-10 md:my-20">
-      <article>
+      <motion.article ref={viewRef} initial={{ opacity: 0, y: 100 }} animate={controls}>
         <h3 className="tracking-wider text-secondary-400 mb-2 text-xl font-bold">
           Contact Us
         </h3>
@@ -14,7 +32,7 @@ const ContactForm = () => {
         <p className="text-lg sm:text-2xl text-gray-600 font-medium">
           Small Teams Making Great Impact.
         </p>
-      </article>
+      </motion.article>
       <form className="flex flex-col lg:w-5/12 lg:px-4 mb-4 md:mb-8 mt-8">
         <div className="flex lg:justify-between gap-3 mb-2 md:mb-4">
           <label
@@ -82,7 +100,10 @@ const ContactForm = () => {
             className="border-form-stroke w-full rounded border-2 border-transparent bg-gray-200 p-3 text-black placeholder-[#929DA7]  outline-none transition-all focus:border-blue-700 focus:bg-transparent active:border-blue-700 disabled:cursor-default disabled:bg-[#F5F7FD] pl-4"
           />
         </label>
-        <Button type="submit" className="w-full rounded text-white bg-[#4e3fca] py-2 font-medium">
+        <Button
+          type="submit"
+          className="w-full rounded text-white bg-[#4e3fca] py-2 font-medium"
+        >
           Send us a Message
         </Button>
       </form>

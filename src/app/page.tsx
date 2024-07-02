@@ -7,6 +7,11 @@ import Testimonial from "@/components/Testimonial";
 import ContactForm from "@/components/ContactForm";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
+import BasicsOfMotion from "@/components/framer-motion/BasicsofMotion";
+import Gestures from "@/components/framer-motion/Gestures";
+import AnimationControl from "@/components/framer-motion/AnimationControl";
+import ViewBasedAnimation from "@/components/framer-motion/ViewBasedAnimation";
+import ScrollBasedAnimation from "@/components/framer-motion/ScrollBasedAnimation";
 
 export default function Home() {
   return (
@@ -20,6 +25,11 @@ export default function Home() {
       <ContactForm />
       <CallToAction />
       <Footer />
+      {/* <BasicsOfMotion /> */}
+      {/* <Gestures /> */}
+      {/* <AnimationControl /> */}
+      {/* <ViewBasedAnimation /> */}
+      {/* <ScrollBasedAnimation /> */}
     </main>
   );
 }

@@ -22,7 +22,7 @@ const TrustedBy = () => {
 
   return (
     <section className=" mt-5 md:my-10 px-6 md:px-10">
-      <h1 className="text-xl sm:text-2xl mb-4 text-center font-semibold">
+      <h1 className="text-xl text-black sm:text-2xl mb-4 text-center font-semibold">
         Trusted by
       </h1>
       <div className="overflow-hidden relative">

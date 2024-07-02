@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const CallToAction = () => {
+
   return (
     <section className="px-6 md:px-16 my-16 sm:my-20">
       <div
