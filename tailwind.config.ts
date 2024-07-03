@@ -21,11 +21,12 @@ const config: Config = {
       keyframes: {
         scroll: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(-100%)" },
         },
       },
       animation: {
         scroll: "scroll 10s linear infinite",
+        scrollOnMobile: "scroll 15s linear infinite",
       },
     },
   },

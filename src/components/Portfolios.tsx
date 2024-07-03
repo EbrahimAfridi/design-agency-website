@@ -3,40 +3,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, useAnimation } from "framer-motion";
-
-const portfolios = [
-  {
-    id: 1,
-    name: "The First The Last",
-    image:
-      "https://assets.awwwards.com/awards/media/cache/thumb_880_660/submissions/2024/06/665b9050214fd838835419.jpg",
-    technologies: ["Next.js", "Motion Framer", "Tailwind CSS"],
-    link: "https://13322566869.com/",
-  },
-  {
-    id: 2,
-    name: "LOCAL STUDIO",
-    image:
-      "https://assets.awwwards.com/awards/media/cache/thumb_880_660/submissions/2024/06/665d54271b446950098230.png",
-    technologies: ["Next.js", "Supabase", "Tailwind CSS"],
-    link: "https://localstudio.fr/",
-  },
-  {
-    id: 3,
-    name: "DOCUSIGN BRAND",
-    image: "https://assets.awwwards.com/awards/sites_of_the_day/2024/05/g1.jpg",
-    technologies: ["React", "shadcn-ui", "Tailwind CSS"],
-    link: "https://brand.docusign.com/",
-  },
-  {
-    id: 4,
-    name: "ARTIFICIAL-GARAGE",
-    image:
-      "https://assets.awwwards.com/awards/sites_of_the_day/2024/04/g1-22.jpg",
-    technologies: ["next-ui", "Next.js", "Tailwind CSS"],
-    link: "https://artificial-garage.com/",
-  },
-];
+import { PORTFOLIOS } from "@/constants";
 
 const Portfolios = () => {
   const viewRef = React.useRef(null);
@@ -47,7 +14,7 @@ const Portfolios = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Trigger animation when the element is in view
     if (isInView) {
       controls.start("visible");
@@ -55,7 +22,10 @@ const Portfolios = () => {
   }, [isInView, controls]);
 
   return (
-    <section className="container-x text-black mb-10 flex flex-col items-start justify-center overflow-hidden rounded-xl py-10 md:mb-20 md:px-32 md:py-20 xl:mb-32">
+    <section
+      className="text-black flex flex-col items-start justify-center overflow-hidden rounded-xl 
+    px-10 sm:px-20 md:px-32 py-10 md:py-20 mb-10 md:mb-20 xl:mb-32"
+    >
       <header className="mb-6 md:mb-12">
         <motion.h3
           ref={viewRef}
@@ -78,10 +48,10 @@ const Portfolios = () => {
           Our Latest Works.
         </motion.h2>
       </header>
-      <main className="grid w-full grid-cols-5 gap-20 gap-y-10 overflow-hidden md:grid-cols-10">
-        {portfolios.map((portfolio) => (
+      <main className="grid w-full grid-cols-1 lg:grid-cols-2 gap-20 gap-y-10 overflow-hidden">
+        {PORTFOLIOS.map((portfolio) => (
           <article
-            className="col-span-5 mb-2 shadow hover:shadow-md rounded"
+            className="w-full col-span-1 mb-2 shadow hover:shadow-md rounded"
             key={portfolio.id}
           >
             <Link
@@ -90,7 +60,10 @@ const Portfolios = () => {
               rel="noopener noreferrer"
             >
               <figure className="mb-4 h-72 w-full overflow-hidden rounded-lg  bg-gray-200 md:h-[400px]">
-                <div className="overflow-hidden" style={{ height: "100%" }}>
+                <div
+                  className="overflow-hidden max-w-full"
+                  style={{ height: "100%" }}
+                >
                   <Image
                     alt={portfolio.name}
                     className="relative h-72 w-full scale-105 object-cover md:h-[400px] md:transition duration-1000 ease-in-out hover:scale-100"
@@ -101,12 +74,14 @@ const Portfolios = () => {
                   />
                 </div>
               </figure>
-              <main className="p-4">
-                <h3 className="text-2xl font-bold">{portfolio.name}</h3>
+              <main className="p-4 max-w-fit">
+                <h3 className="text-lg md:text-2xl font-bold">
+                  {portfolio.name}
+                </h3>
                 <ul className="mt-4 flex flex-wrap gap-4 justify-start">
                   {portfolio.technologies.map((technology) => (
                     <li
-                      className="rounded-full hover:bg-gray-300 bg-gray-200 px-4 py-1 whitespace-nowrap w-fit font-medium"
+                      className="rounded-full hover:bg-gray-300 bg-gray-200 px-2 md:px-4 py-1 whitespace-nowrap w-fit font-medium"
                       key={technology}
                     >
                       {technology}

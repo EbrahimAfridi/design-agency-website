@@ -1,32 +1,34 @@
-import React from "react";
+"use client";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import logo1 from "../../public/apple-11.svg";
-import logo2 from "../../public/github-2.svg";
-import logo3 from "../../public/samsung-8.svg";
-import logo4 from "../../public/tesla-9.svg";
-import logo5 from "../../public/swiggy-logo-1.svg";
-import logo6 from "../../public/star-wars.svg";
+import { COMPANIES } from "@/constants";
+import { motion, useInView } from "framer-motion";
 
 const TrustedBy = () => {
-  const companies = [
-    { logo: logo1 },
-    { logo: logo2 },
-    { logo: logo3 },
-    { logo: logo4 },
-    { logo: logo5 },
-    { logo: logo6 },
-    // Add more companies as needed
-  ];
+  const allCompanies = [...COMPANIES, ...COMPANIES];
+  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
+  const animationRef = useRef(null);
+  const isInView = useInView(animationRef, { once: true }); // Trigger once
 
- const allCompanies = [...companies, ...companies];
+  const handleAnimationComplete = () => {
+    setIsAnimationComplete(true);
+  };
 
   return (
     <section className=" mt-5 md:my-10 px-6 md:px-10">
       <h1 className="text-xl text-black sm:text-2xl mb-4 text-center font-semibold">
         Trusted by
       </h1>
-      <div className="overflow-hidden relative">
-        <div className="flex w-full space-x-10 animate-scroll whitespace-nowrap">
+      <motion.div
+        className="overflow-hidden relative"
+        ref={animationRef}
+        animate={{
+          translateX: isInView && !isAnimationComplete ? "100%" : 0,
+        }}
+        onAnimationComplete={handleAnimationComplete}
+        transition={{ duration: 10, ease: "linear" }}
+      >
+        <div className="flex w-full space-x-10 animate-scroll sm:animate-scrollOnMobile md:animate-scroll whitespace-nowrap">
           {allCompanies.map((company, index) => (
             <div key={index} className="flex items-center space-x-2 ">
               <Image
@@ -35,14 +37,14 @@ const TrustedBy = () => {
                 width={100}
                 height={100}
                 objectFit="cover"
-                className="max-w-[200px] mr-14 hover:scale-125 transition-transform duration-300 ease-in-out"
+                className="max-w-[200px] mr-2 md:mr-14 hover:scale-125"
               />
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
-}
+};
 
 export default TrustedBy;

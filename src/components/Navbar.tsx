@@ -11,7 +11,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { motion } from "framer-motion";
+import BrandNameMotion from "@/animation/BrandNameMotion";
 
 const NavbarUI = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,14 +24,7 @@ const NavbarUI = () => {
       className="flex items-center border-gray-200 border-b-2 bg-[#fcfcfc] text-black py-3"
     >
       <NavbarBrand className="flex gap-4 md:gap-10 items-baseline">
-        <Link
-          href="https://ebrahimafridi.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-2xl md:text-3xl font-sans font-semibold text-inherit"
-        >
-          AgencyFlow
-        </Link>
+        <BrandNameMotion>AgencyFlow</BrandNameMotion>
         <div className="md:flex gap-2 md:gap-4  hidden">
           <Link
             href="https://ebrahimafridi.vercel.app"

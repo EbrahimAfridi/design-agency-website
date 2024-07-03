@@ -22,7 +22,11 @@ const ContactForm = () => {
 
   return (
     <section className="px-8 md:px-16 flex flex-col lg:flex-row justify-between my-10 md:my-20">
-      <motion.article ref={viewRef} initial={{ opacity: 0, y: 100 }} animate={controls}>
+      <motion.article
+        ref={viewRef}
+        initial={{ opacity: 0, y: 100 }}
+        animate={controls}
+      >
         <h3 className="tracking-wider text-secondary-400 mb-2 text-xl font-bold">
           Contact Us
         </h3>

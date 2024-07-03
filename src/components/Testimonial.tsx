@@ -1,36 +1,13 @@
-'use client';
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
-
-const TESTIMONIALS = [
-  {
-    id: 1,
-    message:
-      "I needed a website that could effectively showcase our services and expertise in the tech industry. AgencyFlow was able to deliver exactly what we needed and more.",
-    customerName: "John Doe",
-    companyName: "Apple",
-  },
-  {
-    id: 2,
-    message:
-      "I just have to say, working with AgencyFlow was such a fantastic experience! Their team of experts took our website to the next level, creating a stunning design that perfectly represents our brand.",
-    customerName: "Jane Doe",
-    companyName: "GitHub",
-  },
-  {
-    id: 3,
-    message:
-      "AgencyFlow impressed us with their impressive UX/UI design skills and app development expertise. Their team was highly professional, communicative, and flexible in accommodating our unique requirements. They greatly improved our online presence and we highly recommend their services.",
-    customerName: "John Smith",
-    companyName: "Tesla",
-  },
-];
+import { TESTIMONIALS } from "@/constants";
 
 const Testimonial = () => {
   const viewRef = React.useRef(null);
-  const isInView = useInView(viewRef, { once: true});
-  const controls = useAnimation(); 
-  React.useEffect(() => {
+  const isInView = useInView(viewRef, { once: true });
+  const controls = useAnimation();
+  useEffect(() => {
     if (isInView) {
       controls.start({
         opacity: 1,
@@ -44,7 +21,7 @@ const Testimonial = () => {
   }, [isInView, controls]);
 
   return (
-    <section className="w-full px-16 overflow-hidden py-6 md:py-8 lg:py-12">
+    <section className="w-full px-4 sm:px-16 overflow-hidden py-6 md:py-8 lg:py-12">
       <header className="mb-8">
         <h3 className="text-4xl font-bold text-black">People ❤️ AgencyFlow</h3>
         <p className="text-gray-500 mt-3 sm:mt-4 font-medium text-2xl">
@@ -53,7 +30,7 @@ const Testimonial = () => {
         </p>
       </header>
       <div>
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4">
           {TESTIMONIALS.map((testimonial) => (
             <motion.article
               ref={viewRef}
@@ -63,7 +40,7 @@ const Testimonial = () => {
               }}
               animate={controls}
               key={testimonial.id}
-              className="text-black border border-gray-200 p-4 max-w-md h-fit items-stretch rounded-xl hover:shadow-md"
+              className="w-96 text-black border border-gray-200 p-4 max-w-md h-fit  rounded-xl hover:shadow-md"
             >
               <p className="font-normal mb-2 text-sm leading-5">
                 {testimonial.message}
